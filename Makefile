@@ -78,17 +78,17 @@ release:
 release-patch:
 	@NEXT=v$(MAJOR).$(MINOR).$(shell echo $$(($(PATCH)+1))); \
 	echo "$(CURRENT_TAG) -> $$NEXT"; \
-	git tag $$NEXT && \
+	git tag -a $$NEXT -m "$$NEXT" && \
 	{ git push origin HEAD $$NEXT && echo "released $$NEXT"; } || { git tag -d $$NEXT; echo "push failed - tag rolled back"; exit 1; }
 
 release-minor:
 	@NEXT=v$(MAJOR).$(shell echo $$(($(MINOR)+1))).0; \
 	echo "$(CURRENT_TAG) -> $$NEXT"; \
-	git tag $$NEXT && \
+	git tag -a $$NEXT -m "$$NEXT" && \
 	{ git push origin HEAD $$NEXT && echo "released $$NEXT"; } || { git tag -d $$NEXT; echo "push failed - tag rolled back"; exit 1; }
 
 release-major:
 	@NEXT=v$(shell echo $$(($(MAJOR)+1))).0.0; \
 	echo "$(CURRENT_TAG) -> $$NEXT"; \
-	git tag $$NEXT && \
+	git tag -a $$NEXT -m "$$NEXT" && \
 	{ git push origin HEAD $$NEXT && echo "released $$NEXT"; } || { git tag -d $$NEXT; echo "push failed - tag rolled back"; exit 1; }
