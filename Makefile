@@ -1,4 +1,4 @@
-.PHONY: build test coverage clean cross install changelog release release-patch release-minor release-major
+.PHONY: build test coverage clean cross install changelog release release-patch release-minor release-major _require-git-cliff
 
 VERSION ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo dev)
 LDFLAGS := -s -w -X main.version=$(VERSION)
@@ -64,37 +64,31 @@ MAJOR := $(shell echo $(CURRENT_TAG) | sed 's/^v//' | cut -d. -f1)
 MINOR := $(shell echo $(CURRENT_TAG) | sed 's/^v//' | cut -d. -f2)
 PATCH := $(shell echo $(CURRENT_TAG) | sed 's/^v//' | cut -d. -f3)
 
+# Release targets: tag locally and push. CI handles CHANGELOG.md via git-cliff-action.
+# git-cliff is NOT required on the host.
+
 release:
 	@BUMP=patch; \
-	if git log $$(git describe --tags --abbrev=0)..HEAD --format="%s" | grep -qE '^feat(\(.*\))?!:'; then BUMP=major; \
-	elif git log $$(git describe --tags --abbrev=0)..HEAD --format="%B" | grep -q 'BREAKING CHANGE'; then BUMP=major; \
-	elif git log $$(git describe --tags --abbrev=0)..HEAD --format="%s" | grep -qE '^feat'; then BUMP=minor; fi; \
+	if git log $$(git describe --tags --abbrev=0 2>/dev/null || echo HEAD)..HEAD --format="%s" | grep -qE '^feat(\(.*\))?!:'; then BUMP=major; \
+	elif git log $$(git describe --tags --abbrev=0 2>/dev/null || echo HEAD)..HEAD --format="%B" | grep -q 'BREAKING CHANGE'; then BUMP=major; \
+	elif git log $$(git describe --tags --abbrev=0 2>/dev/null || echo HEAD)..HEAD --format="%s" | grep -qE '^feat'; then BUMP=minor; fi; \
 	echo "detected: $$BUMP"; \
 	$(MAKE) release-$$BUMP
 
-release-patch: _require-git-cliff
+release-patch:
 	@NEXT=v$(MAJOR).$(MINOR).$(shell echo $$(($(PATCH)+1))); \
 	echo "$(CURRENT_TAG) -> $$NEXT"; \
-	git-cliff --tag $$NEXT --output CHANGELOG.md && \
-	git add CHANGELOG.md && \
-	git commit -m "chore: update changelog for $$NEXT" && \
 	git tag $$NEXT && \
-	{ git push origin HEAD $$NEXT && echo "released $$NEXT"; } || { git tag -d $$NEXT; git reset --soft HEAD~1; echo "push failed - rolled back"; exit 1; }
+	{ git push origin HEAD $$NEXT && echo "released $$NEXT"; } || { git tag -d $$NEXT; echo "push failed - tag rolled back"; exit 1; }
 
-release-minor: _require-git-cliff
+release-minor:
 	@NEXT=v$(MAJOR).$(shell echo $$(($(MINOR)+1))).0; \
 	echo "$(CURRENT_TAG) -> $$NEXT"; \
-	git-cliff --tag $$NEXT --output CHANGELOG.md && \
-	git add CHANGELOG.md && \
-	git commit -m "chore: update changelog for $$NEXT" && \
 	git tag $$NEXT && \
-	{ git push origin HEAD $$NEXT && echo "released $$NEXT"; } || { git tag -d $$NEXT; git reset --soft HEAD~1; echo "push failed - rolled back"; exit 1; }
+	{ git push origin HEAD $$NEXT && echo "released $$NEXT"; } || { git tag -d $$NEXT; echo "push failed - tag rolled back"; exit 1; }
 
-release-major: _require-git-cliff
+release-major:
 	@NEXT=v$(shell echo $$(($(MAJOR)+1))).0.0; \
 	echo "$(CURRENT_TAG) -> $$NEXT"; \
-	git-cliff --tag $$NEXT --output CHANGELOG.md && \
-	git add CHANGELOG.md && \
-	git commit -m "chore: update changelog for $$NEXT" && \
 	git tag $$NEXT && \
-	{ git push origin HEAD $$NEXT && echo "released $$NEXT"; } || { git tag -d $$NEXT; git reset --soft HEAD~1; echo "push failed - rolled back"; exit 1; }
+	{ git push origin HEAD $$NEXT && echo "released $$NEXT"; } || { git tag -d $$NEXT; echo "push failed - tag rolled back"; exit 1; }
