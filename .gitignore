@@ -1,0 +1,7 @@
+bin/
+*.exe
+signing.pem
+coverage.out
+.chop.yml
+.claude/
+CLAUDE.md

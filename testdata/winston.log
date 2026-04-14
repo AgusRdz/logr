@@ -1,0 +1,6 @@
+{"level":"info","message":"server started","timestamp":"2025-04-12 14:23:05","service":"api"}
+{"level":"info","message":"GET /users","timestamp":"2025-04-12 14:23:05","service":"api","requestId":"abc123","latency":42}
+{"level":"warn","message":"DB pool exhausted","timestamp":"2025-04-12 14:23:06","service":"users","attempt":2}
+{"level":"error","message":"Payment gateway timeout","timestamp":"2025-04-12 14:23:07","service":"payments","requestId":"xyz789","orderId":99}
+{"level":"debug","message":"cache miss","timestamp":"2025-04-12 14:23:07","service":"cache","key":"user:42"}
+{"level":"error","message":"Payment gateway timeout","timestamp":"2025-04-12 14:23:08","service":"payments","requestId":"abc456","orderId":100}

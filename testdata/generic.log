@@ -1,0 +1,5 @@
+{"severity":"info","msg":"application started","ts":1712930585,"version":"1.0.0"}
+{"severity":"info","msg":"connected to database","ts":1712930585,"host":"db-1","port":5432}
+{"severity":"warn","msg":"high memory usage","ts":1712930586,"percent":89}
+{"severity":"error","msg":"database connection failed","ts":1712930587,"host":"db-1","error":"connection refused"}
+{"severity":"info","msg":"reconnecting","ts":1712930587,"attempt":1}

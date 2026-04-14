@@ -1,0 +1,5 @@
+{"timestamp":"2025-04-12T14:23:05.123Z","level":"INFO","message":"handler invoked","requestId":"abc123","functionName":"payments-prod"}
+{"timestamp":"2025-04-12T14:23:05.234Z","level":"INFO","message":"processing payment","requestId":"abc123","amount":99.99}
+{"timestamp":"2025-04-12T14:23:06.001Z","level":"WARN","message":"slow downstream response","requestId":"abc123","latency":2500}
+{"timestamp":"2025-04-12T14:23:07.002Z","level":"ERROR","message":"Payment gateway timeout","requestId":"xyz789","orderId":99}
+{"timestamp":"2025-04-12T14:23:07.500Z","level":"INFO","message":"handler complete","requestId":"abc123","duration":377}

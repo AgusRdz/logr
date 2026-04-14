@@ -1,0 +1,7 @@
+{"level":"info","message":"valid entry","timestamp":"2025-04-12 14:23:05","service":"api"}
+this is not json
+{"level":"error"
+incomplete json line
+{"level":"warn","message":"another valid entry","timestamp":"2025-04-12 14:23:07","service":"api"}
+{invalid json object}
+{"level":"info","message":"final valid entry","timestamp":"2025-04-12 14:23:08"}

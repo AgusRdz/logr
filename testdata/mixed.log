@@ -1,0 +1,6 @@
+{"level":30,"time":1712930585123,"pid":42,"hostname":"app-1","msg":"pino entry","v":1}
+{"level":"info","message":"winston entry","timestamp":"2025-04-12 14:23:05","service":"api"}
+not a json line at all
+{"timestamp":"2025-04-12T14:23:07.002Z","level":"ERROR","message":"lambda entry","requestId":"xyz789"}
+another plain text line
+{"severity":"warn","msg":"generic entry","ts":1712930588}

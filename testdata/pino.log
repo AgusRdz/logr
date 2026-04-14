@@ -1,0 +1,6 @@
+{"level":30,"time":1712930585123,"pid":42,"hostname":"app-1","msg":"server started","port":3000,"v":1}
+{"level":30,"time":1712930585234,"pid":42,"hostname":"app-1","msg":"GET /users","requestId":"abc123","latency":42,"v":1}
+{"level":40,"time":1712930586000,"pid":42,"hostname":"app-1","msg":"DB pool exhausted","service":"users","attempt":2,"v":1}
+{"level":50,"time":1712930587002,"pid":42,"hostname":"app-1","msg":"Payment gateway timeout","requestId":"xyz789","orderId":99,"v":1}
+{"level":20,"time":1712930587100,"pid":42,"hostname":"app-1","msg":"retrying connection","attempt":1,"v":1}
+{"level":60,"time":1712930588000,"pid":42,"hostname":"app-1","msg":"unrecoverable error, shutting down","v":1}
