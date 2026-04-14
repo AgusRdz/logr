@@ -80,7 +80,7 @@ jobs:
           [ -s bin/checksums.txt.sig ] || { echo "ERROR: checksums.txt.sig is empty"; exit 1; }
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7bf631  # v2
+        uses: softprops/action-gh-release@v2
         with:
           body: ${{ steps.changelog.outputs.content }}
           files: |
@@ -93,7 +93,7 @@ jobs:
             bin/checksums.txt.sig
 
       - name: Attest build provenance
-        uses: actions/attest-build-provenance@e8d6784b2e26e3c8b11a3982b43f3d5dad85a8e9  # v2
+        uses: actions/attest-build-provenance@v2
         with:
           subject-path: bin/logr-*
 
