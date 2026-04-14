@@ -10,6 +10,9 @@ var ordered = []formats.Format{
 	formats.Lambda{},
 	formats.CloudWatch{},
 	formats.Generic{},
+	formats.Logfmt{},
+	formats.CLF{},
+	formats.Textline{},
 	formats.Passthrough{},
 }
 
@@ -59,6 +62,12 @@ func ByName(name string) formats.Format {
 		return formats.CloudWatch{}
 	case "generic":
 		return formats.Generic{}
+	case "logfmt":
+		return formats.Logfmt{}
+	case "clf":
+		return formats.CLF{}
+	case "textline":
+		return formats.Textline{}
 	default:
 		return formats.Generic{}
 	}

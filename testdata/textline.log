@@ -1,0 +1,6 @@
+2025-04-12 14:23:05 INFO  server started port=3000
+2025-04-12 14:23:05 INFO  GET /users requestId=abc123 latency=42ms
+2025-04-12 14:23:06 WARN  DB pool exhausted service=users attempt=2
+2025-04-12 14:23:07 ERROR payment gateway timeout requestId=xyz789 orderId=99
+2025-04-12 14:23:07 DEBUG cache miss key=user:42
+2025-04-12 14:23:08 FATAL unrecoverable error, shutting down

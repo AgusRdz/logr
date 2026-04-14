@@ -1,0 +1,6 @@
+level=info msg="server started" time=2025-04-12T14:23:05.000Z port=3000
+level=info msg="GET /users" time=2025-04-12T14:23:05.234Z requestId=abc123 latency=42ms
+level=warn msg="DB pool exhausted" time=2025-04-12T14:23:06.000Z service=users attempt=2
+level=error msg="payment gateway timeout" time=2025-04-12T14:23:07.002Z requestId=xyz789 orderId=99
+level=debug msg="cache miss" time=2025-04-12T14:23:07.100Z key=user:42
+level=fatal msg="unrecoverable error, shutting down" time=2025-04-12T14:23:08.000Z

@@ -85,7 +85,7 @@ logr app.log --stats --since 1h
 | `--until` | Show entries before (same format as `--since`) |
 | `--field` | Filter by `key=value` (repeatable) |
 | `--contains` | Filter entries containing a substring |
-| `--format` | Force format: `pino`, `winston`, `lambda`, `cloudwatch`, `generic` |
+| `--format` | Force format: `pino`, `winston`, `lambda`, `cloudwatch`, `generic`, `logfmt`, `clf`, `textline` |
 | `--follow` | Follow file like `tail -f` |
 | `--stats` | Print stats summary instead of streaming |
 | `--compact` | One-line output per entry |
@@ -106,8 +106,11 @@ logr auto-detects your log format. You can also force one with `--format`.
 | **Lambda** | `timestamp` + `message`, no `v` field |
 | **CloudWatch** | `logEvents` array or `logGroup` + `logStream` |
 | **Generic** | Any JSON with a level-like and message-like field |
+| **logfmt** | `key=value` pairs with a recognized level/msg/time field |
+| **CLF** | Apache/Nginx Common Log Format and Combined Log Format |
+| **textline** | Lines starting with an ISO timestamp or level keyword |
 
-Non-JSON lines are always passed through unchanged.
+Unrecognized lines are always passed through unchanged.
 
 ## Configuration
 
