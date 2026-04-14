@@ -8,6 +8,19 @@ JSON log beautifier and filter for the terminal. Auto-detects your log format, c
 14:23:07.002  ERROR  Payment gateway timeout          requestId=xyz789  orderId=99
 ```
 
+## Why logr
+
+Most log tools are format-specific. `pino-pretty` only reads Pino. Winston transports only help Winston. `jq` works on anything but you need to know the schema upfront — `.msg // .message // .Message` just to get the message field.
+
+logr auto-detects the format and normalizes everything. Pipe it any JSON log and get readable, colored output with no flags required.
+
+It's the tool you reach for when you don't know — or don't care — what format the logs are in.
+
+**Strongest use cases:**
+- Switching between projects that use different loggers (Pino, Winston, Lambda, CloudWatch)
+- `kubectl logs my-pod | logr` or `aws logs get-log-events ... | logr` - ugly JSON becomes readable instantly
+- `logr --follow app.log --level error` during an incident - no jq gymnastics
+
 ## Install
 
 **macOS / Linux**
