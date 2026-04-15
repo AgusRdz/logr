@@ -76,7 +76,7 @@ func run() error {
 	fs.StringVar(&untilFlag, "until", "", "show entries before this time")
 	fs.Var(&fieldFlags, "field", "filter by field=value (repeatable)")
 	fs.StringVar(&containsFlag, "contains", "", "filter entries containing substring")
-	fs.StringVar(&formatFlag, "format", "", "force format (pino|winston|lambda|cloudwatch|generic)")
+	fs.StringVar(&formatFlag, "format", "", "force format (pino|winston|zap|bunyan|serilog|log4j|monolog|python|syslog|logfmt|clf|generic|<custom>)")
 	fs.BoolVar(&noColorFlag, "no-color", false, "disable color output")
 	fs.BoolVar(&colorFlag, "color", false, "force color output even when piped")
 	fs.BoolVar(&compactFlag, "compact", false, "one-line output per entry")
@@ -236,12 +236,37 @@ func run() error {
 		return err
 	}
 
-	// Detect or override format
-	var fmt formats.Format
+	// Resolve custom format if --format names a user-defined format.
+	// Done before declaring the fmt variable to keep fmt package accessible.
+	var customFmt formats.Format
 	if formatFlag != "" {
-		fmt = detect.ByName(formatFlag)
+		if def, ok := cfg.CustomFormats[formatFlag]; ok {
+			c, err := formats.NewCustom(def)
+			if err != nil {
+				return fmt.Errorf("custom format %q: %w", formatFlag, err)
+			}
+			customFmt = c
+		}
+	}
+
+	// Build auto-detectable custom extras (those with a probe_field or pattern).
+	var customExtras []formats.Format
+	for _, def := range cfg.CustomFormats {
+		if def.ProbeField != "" || def.Pattern != "" {
+			if c, err := formats.NewCustom(def); err == nil {
+				customExtras = append(customExtras, c)
+			}
+		}
+	}
+
+	// Detect or override format
+	var selectedFmt formats.Format
+	if customFmt != nil {
+		selectedFmt = customFmt
+	} else if formatFlag != "" {
+		selectedFmt = detect.ByName(formatFlag)
 	} else {
-		fmt = detect.Detect(sampleLines)
+		selectedFmt = detect.DetectWithExtras(sampleLines, customExtras)
 	}
 
 	// Replay sample + rest of reader through the pipeline
@@ -254,7 +279,7 @@ func run() error {
 
 	// --- Stats mode ---
 	if statsFlag {
-		return runStats(combined, fmt, filters, colorEnabled)
+		return runStats(combined, selectedFmt, filters, colorEnabled)
 	}
 
 	// --- Build renderer ---
@@ -269,7 +294,7 @@ func run() error {
 	}
 
 	// --- Stream pipeline ---
-	return streamLines(combined, fmt, filters, renderer)
+	return streamLines(combined, selectedFmt, filters, renderer)
 }
 
 func streamLines(r io.Reader, fmt formats.Format, filters filter.Chain, renderer render.Renderer) error {
@@ -387,7 +412,7 @@ func printHelp() {
   --until      show entries before (same format as --since)
   --field      filter by field=value (repeatable: --field a=1 --field b=2)
   --contains   filter entries containing substring
-  --format     force format: pino, winston, lambda, cloudwatch, generic
+  --format     force format: pino, winston, zap, bunyan, serilog, log4j, monolog, python, syslog, logfmt, clf, generic, or a custom name from config
   --follow     tail -f mode (file only)
   --stats      print stats summary instead of streaming
   --compact    one-line output per entry

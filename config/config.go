@@ -4,13 +4,16 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+
+	"github.com/AgusRdz/logr/formats"
 )
 
 // Config holds user preferences for logr.
 type Config struct {
-	NoColor    bool     `json:"no_color"`
-	Compact    bool     `json:"compact"`
-	HideFields []string `json:"hide_fields"`
+	NoColor       bool                              `json:"no_color"`
+	Compact       bool                              `json:"compact"`
+	HideFields    []string                          `json:"hide_fields"`
+	CustomFormats map[string]formats.CustomFormatDef `json:"custom_formats"`
 }
 
 // Path returns ~/.config/logr/config.json
