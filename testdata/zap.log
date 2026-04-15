@@ -1,0 +1,5 @@
+{"level":"info","ts":1712930585.123456,"caller":"server/main.go:42","msg":"server started","port":8080}
+{"level":"warn","ts":1712930586.234567,"caller":"db/pool.go:99","msg":"DB pool exhausted","service":"users","attempt":2}
+{"level":"error","ts":1712930587.345678,"caller":"handler/request.go:77","msg":"request failed","statusCode":500,"latency_ms":342}
+{"level":"fatal","ts":1712930588.456789,"caller":"main.go:15","msg":"unhandled exception"}
+{"level":"debug","ts":1712930589.567890,"caller":"cache/lru.go:33","msg":"cache miss","key":"user:42"}

@@ -1,0 +1,5 @@
+{"name":"app","levelname":"INFO","msg":"Server started","created":1712930585.123,"pathname":"/app/server.py","lineno":42,"process":1234,"thread":140234567890,"funcName":"start"}
+{"name":"db","levelname":"WARNING","msg":"DB pool exhausted","created":1712930586.234,"pathname":"/app/db/pool.py","lineno":99,"process":1234,"thread":140234567890,"funcName":"acquire"}
+{"name":"http","levelname":"ERROR","msg":"Request failed","created":1712930587.345,"pathname":"/app/handler.py","lineno":77,"process":1234,"thread":140234567891,"funcName":"handle","statusCode":500}
+{"name":"app","levelname":"CRITICAL","msg":"Unhandled exception","created":1712930588.456,"pathname":"/app/main.py","lineno":15,"process":1234,"thread":140234567890,"funcName":"main"}
+{"event":"cache miss","level":"debug","timestamp":"2024-04-12T14:23:09Z","key":"user:42","cache":"lru"}

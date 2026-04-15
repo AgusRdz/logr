@@ -1,0 +1,5 @@
+{"message":"Server started","context":{"port":8080},"level":200,"level_name":"INFO","channel":"app","datetime":"2024-04-12T14:23:05+00:00","extra":{}}
+{"message":"DB pool exhausted","context":{"service":"users","attempt":2},"level":300,"level_name":"WARNING","channel":"db","datetime":"2024-04-12T14:23:06+00:00","extra":{}}
+{"message":"Request failed","context":{"statusCode":500},"level":400,"level_name":"ERROR","channel":"http","datetime":"2024-04-12T14:23:07+00:00","extra":{"memory_usage":4096}}
+{"message":"Unhandled exception","context":{"exception":"Cannot read property"},"level":500,"level_name":"CRITICAL","channel":"app","datetime":"2024-04-12T14:23:08+00:00","extra":{}}
+{"message":"Cache miss","context":{"key":"user:42"},"level":100,"level_name":"DEBUG","channel":"cache","datetime":"2024-04-12T14:23:09+00:00","extra":{}}

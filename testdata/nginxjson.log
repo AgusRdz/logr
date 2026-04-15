@@ -1,0 +1,5 @@
+{"remote_addr":"10.0.0.1","time_local":"2025-04-12T14:23:05+00:00","request":"GET /api/users HTTP/1.1","status":"200","body_bytes_sent":"1024","http_referer":"-","http_user_agent":"Mozilla/5.0","request_time":"0.042"}
+{"remote_addr":"10.0.0.2","time_local":"2025-04-12T14:23:06+00:00","request":"POST /api/orders HTTP/1.1","status":"201","body_bytes_sent":"256","http_referer":"-","http_user_agent":"curl/7.68.0","request_time":"0.123"}
+{"remote_addr":"10.0.0.3","time_local":"2025-04-12T14:23:07+00:00","request":"GET /api/secret HTTP/1.1","status":"403","body_bytes_sent":"64","http_referer":"-","http_user_agent":"python-requests/2.28.0","request_time":"0.005"}
+{"remote_addr":"10.0.0.4","time_local":"2025-04-12T14:23:08+00:00","request":"GET /api/unknown HTTP/1.1","status":"404","body_bytes_sent":"32","http_referer":"-","http_user_agent":"Go-http-client/1.1","request_time":"0.003"}
+{"remote_addr":"10.0.0.5","time_local":"2025-04-12T14:23:09+00:00","request":"POST /api/payments HTTP/1.1","status":"500","body_bytes_sent":"128","http_referer":"-","http_user_agent":"axios/1.4.0","request_time":"5.001"}

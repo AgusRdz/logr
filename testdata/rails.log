@@ -1,0 +1,6 @@
+I, [2025-04-12T14:23:05.123456 #1234]  INFO -- : Started GET "/users" for 127.0.0.1
+I, [2025-04-12T14:23:05.145678 #1234]  INFO -- : Processing by UsersController#index as HTML
+W, [2025-04-12T14:23:05.234567 #1234]  WARN -- : DB pool exhausted, waiting for connection
+I, [2025-04-12T14:23:05.456789 #1234]  INFO -- : Completed 200 OK in 311ms (Views: 42.3ms | ActiveRecord: 267.8ms)
+E, [2025-04-12T14:23:06.567890 #1234] ERROR -- : ArgumentError: Invalid payment method
+F, [2025-04-12T14:23:07.678901 #1234] FATAL -- : Killed

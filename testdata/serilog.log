@@ -1,0 +1,5 @@
+{"@t":"2024-04-12T14:23:05.0000000Z","@mt":"Server started on port {Port}","Port":8080}
+{"@t":"2024-04-12T14:23:06.0000000Z","@mt":"DB pool exhausted for {Service}","@l":"Warning","Service":"users","Attempt":2}
+{"@t":"2024-04-12T14:23:07.0000000Z","@mt":"Request failed with status {StatusCode}","@l":"Error","StatusCode":500}
+{"@t":"2024-04-12T14:23:08.0000000Z","@mt":"Unhandled exception","@l":"Fatal","@x":"System.NullReferenceException: Object reference not set"}
+{"@t":"2024-04-12T14:23:09.0000000Z","@mt":"Cache miss for key {Key}","@l":"Debug","Key":"user:42"}

@@ -1,0 +1,5 @@
+{"timeMillis":1712930585000,"thread":"main","level":"INFO","loggerName":"com.example.App","message":"Application started","endOfBatch":false,"loggerFqcn":"org.apache.logging.log4j.spi.AbstractLogger","contextMap":{}}
+{"timeMillis":1712930586000,"thread":"http-nio-1","level":"WARN","loggerName":"com.example.db.Pool","message":"DB pool exhausted","endOfBatch":false,"loggerFqcn":"org.apache.logging.log4j.spi.AbstractLogger","contextMap":{"requestId":"abc123"}}
+{"timeMillis":1712930587000,"thread":"http-nio-2","level":"ERROR","loggerName":"com.example.web.Handler","message":"Request failed","endOfBatch":true,"loggerFqcn":"org.apache.logging.log4j.spi.AbstractLogger","contextMap":{}}
+{"timeMillis":1712930588000,"thread":"main","level":"FATAL","loggerName":"com.example.App","message":"Unhandled exception","endOfBatch":true,"loggerFqcn":"org.apache.logging.log4j.spi.AbstractLogger","contextMap":{}}
+{"timeMillis":1712930589000,"thread":"worker-1","level":"DEBUG","loggerName":"com.example.cache.Lru","message":"Cache miss","endOfBatch":false,"loggerFqcn":"org.apache.logging.log4j.spi.AbstractLogger","contextMap":{}}

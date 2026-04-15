@@ -1,0 +1,5 @@
+{"v":0,"level":30,"name":"myapp","hostname":"myhost","pid":1234,"time":"2024-04-12T14:23:05.000Z","msg":"server started","port":3000}
+{"v":0,"level":40,"name":"myapp","hostname":"myhost","pid":1234,"time":"2024-04-12T14:23:06.000Z","msg":"DB pool exhausted","service":"users","attempt":2}
+{"v":0,"level":50,"name":"myapp","hostname":"myhost","pid":1234,"time":"2024-04-12T14:23:07.000Z","msg":"request failed","statusCode":500}
+{"v":0,"level":60,"name":"myapp","hostname":"myhost","pid":1234,"time":"2024-04-12T14:23:08.000Z","msg":"unhandled exception","err":{"message":"cannot read property"}}
+{"v":0,"level":20,"name":"myapp","hostname":"myhost","pid":1234,"time":"2024-04-12T14:23:09.000Z","msg":"debug checkpoint","step":1}
