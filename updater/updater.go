@@ -127,7 +127,9 @@ func scheduleWindowsSwap(newPath, execPath string) error {
 	}
 	bat.Close()
 
-	cmd := exec.Command("cmd", "/C", "start", "", "/B", batPath)
+	// /MIN starts the script in a detached minimized window, independent of
+	// the parent process. /B would keep it in the same console and die with us.
+	cmd := exec.Command("cmd", "/C", "start", "/MIN", "", batPath)
 	return cmd.Start()
 }
 
