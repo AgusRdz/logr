@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"runtime"
 )
@@ -83,15 +84,21 @@ func Run(currentVersion string) {
 	// Replace binary
 	if err := os.Rename(tmpPath, execPath); err != nil {
 		if runtime.GOOS == "windows" {
+			// Windows locks the running exe. Move the new binary to a staging path,
+			// then launch a detached batch script that swaps the files after we exit.
 			newPath := execPath + ".new"
 			if renameErr := os.Rename(tmpPath, newPath); renameErr != nil {
 				os.Remove(tmpPath)
 				fmt.Printf("update failed: %v\n", err)
 				return
 			}
-			fmt.Printf("updated binary written to %s\n", newPath)
-			fmt.Println("Replace the running binary manually or restart to apply the update.")
-			return
+			if scheduleErr := scheduleWindowsSwap(newPath, execPath); scheduleErr != nil {
+				fmt.Printf("updated binary written to %s\n", newPath)
+				fmt.Println("Replace the running binary manually to apply the update.")
+				return
+			}
+			fmt.Printf("updated to %s — restart logr to use the new version\n", latest)
+			os.Exit(0)
 		}
 		os.Remove(tmpPath)
 		fmt.Printf("update failed: %v\n", err)
@@ -99,6 +106,29 @@ func Run(currentVersion string) {
 	}
 
 	fmt.Printf("updated to %s\n", latest)
+}
+
+// scheduleWindowsSwap writes a self-deleting batch script that waits for the
+// current process to release the exe lock, then moves newPath over execPath.
+func scheduleWindowsSwap(newPath, execPath string) error {
+	bat, err := os.CreateTemp(filepath.Dir(execPath), "logr-swap-*.bat")
+	if err != nil {
+		return err
+	}
+	batPath := bat.Name()
+
+	// ping -n 2 gives ~1 second delay — enough for our process to exit.
+	script := fmt.Sprintf("@echo off\r\nping -n 2 127.0.0.1 > nul\r\nmove /Y %q %q\r\ndel %q\r\n",
+		newPath, execPath, batPath)
+	if _, err := bat.WriteString(script); err != nil {
+		bat.Close()
+		os.Remove(batPath)
+		return err
+	}
+	bat.Close()
+
+	cmd := exec.Command("cmd", "/C", "start", "", "/B", batPath)
+	return cmd.Start()
 }
 
 // CheckLatest returns the latest version tag from GitHub releases API.
