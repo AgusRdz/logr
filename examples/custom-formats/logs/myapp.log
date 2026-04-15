@@ -1,0 +1,5 @@
+{"log_time":"2025-04-12T14:23:05.123Z","log_level":"INFO","log_message":"server started","port":8080,"env":"production"}
+{"log_time":"2025-04-12T14:23:06.234Z","log_level":"WARN","log_message":"DB pool exhausted","service":"users","pool_size":10,"waiting":3}
+{"log_time":"2025-04-12T14:23:07.002Z","log_level":"ERROR","log_message":"payment gateway timeout","requestId":"xyz789","orderId":99,"latency_ms":5001}
+{"log_time":"2025-04-12T14:23:08.456Z","log_level":"INFO","log_message":"request complete","requestId":"abc123","status":200,"latency_ms":42}
+{"log_time":"2025-04-12T14:23:09.789Z","log_level":"DEBUG","log_message":"cache miss","key":"user:42","store":"redis"}

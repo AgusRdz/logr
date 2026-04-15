@@ -1,0 +1,6 @@
+[2025-04-12T14:23:05.123Z] INFO: Worker started, queue=email-notifications
+[2025-04-12T14:23:06.234Z] INFO: Job picked up, job_id=8821 queue=email-notifications
+[2025-04-12T14:23:06.890Z] WARN: Retry attempt 2 of 3, job_id=8821 reason=smtp_timeout
+[2025-04-12T14:23:07.234Z] ERROR: Job failed permanently, job_id=8821 error=max_retries_exceeded
+[2025-04-12T14:23:08.456Z] DEBUG: Queue depth check, queue=email-notifications depth=14
+[2025-04-12T14:23:09.789Z] INFO: Job complete, job_id=8822 duration_ms=342

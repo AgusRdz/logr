@@ -1,0 +1,39 @@
+{
+  "custom_formats": {
+
+    "myapp": {
+      "_comment": "Internal app with non-standard JSON field names",
+      "probe_field": "log_time",
+      "ts_field":    "log_time",
+      "level_field": "log_level",
+      "msg_field":   "log_message"
+    },
+
+    "myapp-numeric-levels": {
+      "_comment": "Same structure but level is a Pino-style integer",
+      "probe_field": "log_ts",
+      "ts_field":    "log_ts",
+      "level_field": "log_level",
+      "msg_field":   "log_msg",
+      "level_map": {
+        "10": "DEBUG",
+        "20": "DEBUG",
+        "30": "INFO",
+        "40": "WARN",
+        "50": "ERROR",
+        "60": "FATAL"
+      }
+    },
+
+    "legacy-worker": {
+      "_comment": "Old-style bracketed timestamp text logs: [2025-04-12T14:23:05Z] LEVEL: message",
+      "pattern": "^\\[(?P<ts>[^\\]]+)\\] (?P<level>[A-Z]+): (?P<msg>.+)$"
+    },
+
+    "tagged-service": {
+      "_comment": "Text logs with inline service tag: 2025-04-12T14:23:05Z [auth] WARN message",
+      "pattern": "^(?P<ts>\\S+) \\[(?P<service>[^\\]]+)\\] (?P<level>[A-Z]+) (?P<msg>.+)$"
+    }
+
+  }
+}
