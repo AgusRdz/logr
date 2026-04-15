@@ -30,11 +30,11 @@ var TsAliases = []string{"ts", "time", "timestamp", "at", "created_at"}
 // NormalizeLevel maps raw level strings to canonical uppercase forms.
 func NormalizeLevel(raw string) string {
 	switch strings.ToUpper(strings.TrimSpace(raw)) {
-	case "TRACE", "TRC", "VERBOSE":
+	case "TRACE", "TRC", "VERBOSE", "SILLY", "TIMING", "PAUSE", "RESUME":
 		return "DEBUG"
 	case "DEBUG", "DBG", "D":
 		return "DEBUG"
-	case "INFO", "INFORMATION", "INF", "I":
+	case "INFO", "INFORMATION", "INF", "I", "HTTP", "NOTICE":
 		return "INFO"
 	case "WARN", "WARNING", "WRN", "W":
 		return "WARN"

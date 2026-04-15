@@ -22,6 +22,7 @@ var ordered = []formats.Format{
 	formats.Logfmt{},    // key=value (Go logrus text, etc.)
 	formats.Syslog{},    // RFC 5424 syslog (<prival>)
 	formats.Rails{},     // Ruby on Rails production.log text
+	formats.Npm{},       // npm debug logs (<seq> <level> <message>)
 	formats.CLF{},       // Apache/Nginx access logs
 	formats.Textline{},  // plain text with level prefix
 	formats.Passthrough{},
@@ -105,6 +106,8 @@ func ByName(name string) formats.Format {
 		return formats.NginxJSON{}
 	case "rails":
 		return formats.Rails{}
+	case "npm":
+		return formats.Npm{}
 	case "clf":
 		return formats.CLF{}
 	case "textline":

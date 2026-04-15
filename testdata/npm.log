@@ -1,0 +1,20 @@
+0 verbose cli C:\Users\agustin.rodriguez\AppData\Local\Programs\runjs\RunJS.exe C:\Users\agustin.rodriguez\AppData\Local\Programs\runjs\resources\app.asar.unpacked\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.8.2
+2 info using node@v22.19.0
+3 silly config load:file:C:\Users\agustin.rodriguez\AppData\Local\Programs\runjs\resources\app.asar.unpacked\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\agustin.rodriguez\AppData\Roaming\runjs\.npmrc
+5 silly config load:file:C:\Users\agustin.rodriguez\.npmrc
+6 silly config load:file:C:\Users\agustin.rodriguez\AppData\Local\Programs\runjs\etc\npmrc
+7 verbose title npm init
+8 verbose argv "init" "--yes"
+9 verbose logfile logs-max:10 dir:C:\Users\agustin.rodriguez\npm-cache\_logs\2025-12-09T18_54_11_066Z-
+10 verbose logfile C:\Users\agustin.rodriguez\npm-cache\_logs\2025-12-09T18_54_11_066Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly package data {
+12 silly package data   name: 'runjs',
+12 silly package data   version: '1.0.0',
+12 silly package data   license: 'ISC',
+42 warn deprecated uuid@3.4.0: Please upgrade to version 7 or higher
+99 error code ENOENT
+99 error errno -4058
+99 error enoent ENOENT: no such file or directory
