@@ -1,11 +1,15 @@
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"flag"
 	"fmt"
 	"io"
 	"os"
+	"os/exec"
+	"path/filepath"
+	"runtime"
 	"strings"
 	"time"
 
@@ -17,8 +21,6 @@ import (
 	"github.com/AgusRdz/logr/render"
 	"github.com/AgusRdz/logr/stats"
 	"github.com/AgusRdz/logr/updater"
-
-	"bufio"
 )
 
 var version = "dev"
@@ -34,6 +36,9 @@ func main() {
 			return
 		case "help", "--help", "-h":
 			printHelp()
+			return
+		case "config":
+			openConfig()
 			return
 		}
 	}
@@ -392,6 +397,55 @@ func processLine(line []byte, fmt formats.Format, filters filter.Chain, renderer
 	renderer.Write(entry)
 }
 
+// openConfig ensures the config file exists then opens it in the user's editor.
+func openConfig() {
+	path := config.Path()
+	if path == "" {
+		fmt.Fprintln(os.Stderr, "logr: could not determine config path")
+		os.Exit(1)
+	}
+
+	// Create file with defaults if it doesn't exist yet
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
+			fmt.Fprintf(os.Stderr, "logr: %v\n", err)
+			os.Exit(1)
+		}
+		defaults := "{\n  \"no_color\": false,\n  \"compact\": false,\n  \"hide_fields\": [],\n  \"custom_formats\": {}\n}\n"
+		if err := os.WriteFile(path, []byte(defaults), 0644); err != nil {
+			fmt.Fprintf(os.Stderr, "logr: %v\n", err)
+			os.Exit(1)
+		}
+	}
+
+	fmt.Println(path)
+
+	var cmd *exec.Cmd
+	switch runtime.GOOS {
+	case "windows":
+		cmd = exec.Command("cmd", "/C", "start", "", path)
+	case "darwin":
+		cmd = exec.Command("open", path)
+	default:
+		editor := os.Getenv("EDITOR")
+		if editor == "" {
+			editor = os.Getenv("VISUAL")
+		}
+		if editor == "" {
+			editor = "vi"
+		}
+		cmd = exec.Command(editor, path)
+		cmd.Stdin = os.Stdin
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+	}
+
+	if err := cmd.Run(); err != nil {
+		fmt.Fprintf(os.Stderr, "logr: could not open editor: %v\n", err)
+		os.Exit(1)
+	}
+}
+
 func printHelp() {
 	fmt.Printf(`%s
 
@@ -425,6 +479,7 @@ func printHelp() {
 %s
   logr version   print version
   logr update    update to latest release
+  logr config    open config file in $EDITOR (creates it if missing)
   logr help      show this help
 
 `, bold("logr"), cyan("usage:"), cyan("flags:"), cyan("commands:"))
